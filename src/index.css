@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*{
+    box-sizing: border-box;
+    direction: rtl;
+}
+@font-face {
+  font-family: "IranSans";
+  src: url("/fonts/IRANSans-Edit.ttf") format("ttf");
+  font-style: normal;
+  font-display: swap;
+}
