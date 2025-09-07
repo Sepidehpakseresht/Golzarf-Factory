@@ -1,6 +1,8 @@
 import React from 'react'
 import Navbar from "./components/Navbar";
 import Hero from './components/Hero';
+import Products from './components/Products';
+import AboutFlipCard from './components/FlipCard/AboutFlipCard';
 
 
 
@@ -9,9 +11,11 @@ import Hero from './components/Hero';
 export default function App() {
 
   return (
-    <div >
+    <div className='px-14' >
     <Navbar/>
     <Hero/>
+    <Products/>
+    <AboutFlipCard/>
     </div>
 
   )
