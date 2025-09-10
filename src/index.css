@@ -9,7 +9,7 @@
 }
 
 body{
-  background-color: #EEF7FE;
+  background-color: #F8FAFC;
 }
 
 @font-face {
@@ -18,65 +18,6 @@ body{
   font-style: normal;
   font-display: swap;
 }
-.dropdown-container {
-  position: relative; /* This creates a positioning context */
-}
-.dropdown-menu {
-  position: absolute; /* Position relative to the dropdown-container */
-  top: 160%; /* Appear right below the button */
-  right: -100%;
-  z-index: 1000; /* Make sure it appears above other content */
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-  border-radius: 8px;
-  min-width: 200px;
-}
-
-.hero-video {
-  position: relative;
-  height: 100vh;
-  overflow: hidden;
-}
-
-.hero-background-video {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: -1;
-}
-
-.hero-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.4); /* Dark overlay for text readability */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.cta-button {
-  background: linear-gradient(45deg, #007bff, #0056b3);
-  color: white;
-  border: none;
-  border-radius: 8px;
-  font-size: 18px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  padding: 12px 24px;
-}
-
-.cta-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(0, 123, 255, 0.3);
-}
-
-
 
 .background-glow {
   background: radial-gradient(circle, rgba(118, 75, 224, 0.2), rgba(118, 75, 224, 0) 70%);
@@ -84,55 +25,7 @@ body{
 
 }
 
-
-/* timeline */
-
-.timeline {
-  position: relative;
-  padding: 2rem 1rem;
-  max-width: 1000px;
-  margin: 0 auto; 
-}
-
-.timeline::before {
-  content: '';
-  position: absolute;
-  left: 30px;
-  top: 0;
-  bottom: 0;
-  width: 2px;
-  background: #007bff;
-}
-
-/* Mobile first - simple single column */
-.timeline-item {
-  display: flex;
-  align-items: flex-start;
-  margin: 3rem 0;
-  position: relative;
-}
-
-.timeline-circle {
-  width: 80px;
-  height: 80px;
-  background: #007bff;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  font-weight: bold;
-  z-index: 1;
-  flex-shrink: 0;
-}
-
-.timeline-content {
-  background: white;
-  padding: 1.5rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-  margin-right: 2rem;
-}
+/* Button */
 .animate-up-down {
   animation: upDown 1.5s ease-in-out infinite;
 }
@@ -140,28 +33,6 @@ body{
 @keyframes upDown {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-5px); }
-}
-/* Desktop - alternating layout */
-@media (min-width: 768px) {
-  .timeline::before {
-    left: 50%;
-    transform: translateX(-50%);
-  }
-  
-  .timeline-circle {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-  }
-  
-  .timeline-item:nth-child(odd) {
-    justify-content: flex-end;
-  }
-  
-  .timeline-item:nth-child(odd) .timeline-content {
-    margin-left: 2rem;
-    margin-right: 0;
-  }
 }
 
 @keyframes typing {

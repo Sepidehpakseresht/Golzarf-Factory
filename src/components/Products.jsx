@@ -78,7 +78,7 @@ const getVisibleProducts = () => {
 const visibleProducts = getVisibleProducts();
 
   return (
-    <section className="py-16 bg-[#EEF7FE]">
+    <section className="py-16 ">
       <div className="max-w-6xl mx-auto px-4">
         {/* Section Title */}
         <div className="text-center mb-12">

@@ -1,46 +1,131 @@
-import React from 'react'
-import Dropdown from './DropdownNavbar'
+import React, { useEffect, useState } from "react";
+import Dropdown from "./DropdownNavbar/DropdownNavbar";
 
 export default function Navbar() {
+  const [scrolled, setScrolled] = useState(false);
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 80);
+    onScroll(); // set initial state
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  // wrapper style changes with scroll
+  const wrapper =
+    `fixed inset-x-0 top-0 z-50 flex justify-center transition-all duration-300` +
+    ` ${scrolled ? "text-slate-900" : "text-white"}`;
+
+  // inner pill container
+  const shell =
+    "max-w-screen-xl h-full flex flex-wrap items-center gap-2 mx-auto" +
+    " p-2 mt-5 border border-white/10 rounded-full backdrop-blur-xl backdrop-saturate-200" +
+    (scrolled ? " bg-white/90 shadow-sm" : " bg-surface-1/10");
+
+  // links
+  const link =
+    "block py-2 px-3 rounded-sm md:bg-transparent md:p-0 transition-colors";
+  const linkHover = scrolled ? " hover:text-[#3C71ED]" : " hover:text-[#b6dbdf]";
+
   return (
-    
-
     <>
-    <nav class="fixed min-w-full z-10 flex justify-between">
-        <div class="max-w-screen-xl h-full flex flex-wrap items-center gap-2 mx-auto p-2 mt-5 bg-surface-1  border border-white border-opacity-10 rounded-full  backdrop-blur-xl backdrop-saturate-200">
-            <a href="#" class="flex items-center space-x-3 rtl:space-x-reverse">
-                <img src="/public/fonts/golzarfLogo-bgWhite.png" class="h-14 md:h-16 lg:h-16 " alt="Gorlzarf Logo" />
-            </a>
-            <button data-collapse-toggle="navbar-dropdown" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-white rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-white dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-dropdown" aria-expanded="false">
-                <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
-                </svg>
-            </button>
-            <div class="hidden w-full md:block md:w-auto" id="navbar-dropdown">
-                <ul class="flex flex-col font-normal text-blue-600 p-4 md:p-0 mt-4 gap-5 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 ">
-                    <li>
-                        <a href="#" class="block py-2 px-3 mx-4 text-white bg-blue-600 rounded-sm md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500 dark:bg-blue-600 md:dark:bg-transparent" aria-current="page">صفحه نخست</a>
-                    </li>
-                    <li>
+      <nav className={wrapper}>
+        <div className={shell}>
+          {/* Logo */}
+          <a href="#home" className="flex items-center">
+            {/* In Vite, files in /public are referenced WITHOUT /public prefix */}
+            <img
+              src="/fonts/golzarfLogo-bgWhite.png"
+              className="h-14 md:h-16 lg:h-16"
+              alt="Golzarf Logo"
+            />
+          </a>
 
-                            {/* Dropdown menu  */}
-                            <Dropdown></Dropdown>
-                    </li>
-                    <li>
-                        <a href="#" class="block py-2 px-3  rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-400 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-400 dark:hover:text-white md:dark:hover:bg-transparent">کاتالوگ محصولات</a>
-                    </li>
-                    <li>
-                        <a href="#" class="block py-2 px-3  rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-400 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-400 dark:hover:text-white md:dark:hover:bg-transparent">درباره ما</a>
-                    </li>
-                    <li>
-                        <a href="#" class="block py-2 px-3  rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-400 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-400 dark:hover:text-white md:dark:hover:bg-transparent">تماس با ما</a>
-                    </li>
-                </ul>
-            </div>
+          {/* Mobile toggle */}
+          <button
+            type="button"
+            onClick={() => setOpen((v) => !v)}
+            className={
+              "inline-flex items-center justify-center w-10 h-10 md:hidden rounded-lg ring-1 transition-colors " +
+              (scrolled
+                ? "text-slate-700 ring-black/10 hover:bg-black/5"
+                : "text-white ring-white/20 hover:bg-white/10")
+            }
+            aria-controls="navbar-dropdown"
+            aria-expanded={open}
+          >
+            <svg
+              className="w-5 h-5"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 17 14"
+            >
+              <path
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M1 1h15M1 7h15M1 13h15"
+              />
+            </svg>
+          </button>
+
+          {/* Links */}
+          <div
+            id="navbar-dropdown"
+            className={
+              (open ? "block" : "hidden") + " w-full md:block md:w-auto"
+            }
+          >
+            <ul className="flex flex-col md:flex-row items-start md:items-center font-normal p-4 md:p-0 mt-4 md:mt-0 gap-3 md:gap-5 rtl:space-x-reverse">
+              <li>
+                <a href="#home" className={`${link} ${linkHover}`}>
+                  صفحه نخست
+                </a>
+              </li>
+
+              {/* Dropdown menu */}
+              <li>
+                <Dropdown />
+              </li>
+
+              <li>
+                <a href="#catalog" className={`${link} ${linkHover}`}>
+                  کاتالوگ محصولات
+                </a>
+              </li>
+
+              <li>
+                <a href="#about" className={`${link} ${linkHover}`}>
+                  درباره ما
+                </a>
+              </li>
+
+              <li>
+                <a href="#contact" className={`${link} ${linkHover}`}>
+                  تماس با ما
+                </a>
+              </li>
+
+              {/* CTA (optional) */}
+              <li className="md:ml-2">
+                <a
+                  href="#contact"
+                  className={
+                    "rounded-xl px-4 py-2 font-semibold transition-colors " +
+                    (scrolled
+                      ? "bg-[#3C71ED] text-white hover:bg-[#2f5ed0]"
+                      : "bg-white/10 text-white hover:bg-white/20")
+                  }
+                >
+                  استعلام قیمت
+                </a>
+              </li>
+            </ul>
+          </div>
         </div>
-    </nav>
-
+      </nav>
     </>
-
-  )
+  );
 }

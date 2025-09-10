@@ -26,3 +26,39 @@
 .flip-card-back {
   transform: rotateY(180deg);
 }
+
+.reason-card {
+  min-height: 200px;
+  background: white;
+  position: relative;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.reason-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 5rem;
+  height: 5rem;
+  background: #f3f4f6;
+  transform: rotate(45deg) translate(2.5rem, -2.5rem);
+}
+/* AboutFlipCard.css */
+.flip-card-container { perspective: 1000px; }
+.flip-card {
+  transform-style: preserve-3d;
+  transition: transform 0.6s ease;
+  will-change: transform;
+}
+.flip-card.flipped { transform: rotateY(180deg); }
+
+.flip-card-front, .flip-card-back {
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+}
+.flip-card-back { transform: rotateY(180deg); }
+
